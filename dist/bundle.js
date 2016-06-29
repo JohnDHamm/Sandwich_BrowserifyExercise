@@ -12,31 +12,56 @@ var breadOptions = document.getElementById("breadSelect");
 var breadList = SandwichMaker.bread.getBreadTypes();
 for (var i = 0; i < breadList.length; i++) {
 	var breadName = breadList[i];
-	breadOptions.innerHTML += `<option value="${breadName}">${breadName}</option>`
+	breadOptions.innerHTML += `<option value="${breadName}">${breadName}</option>`;
 }
+// meat
+var meatChoices = document.getElementById("meat");
+
+var meatList = SandwichMaker.meat.getMeatTypes();
+for (var i = 0; i < meatList.length; i++) {
+	var meatName = meatList[i];
+	meatChoices.innerHTML += `<label for="meat_${i}" class="label"><input type="checkbox" id="meat_${i}" class="checkBox" name="meatType" value="${meatName}">${meatName}</label>`;
+}
+// cheese
+var cheeseChoices = document.getElementById("cheese");
+
+var cheeseList = SandwichMaker.cheese.getCheeseTypes();
+for (var i = 0; i < cheeseList.length; i++) {
+	var cheeseName = cheeseList[i];
+	cheeseChoices.innerHTML += `<label for="cheese_${i}" class="label"><input type="checkbox" id="cheese_${i}" class="checkBox" name="cheeseType" value="${cheeseName}">${cheeseName}</label>`;
+}
+// veggies
+var veggieChoices = document.getElementById("veggies");
+
+var veggieList = SandwichMaker.veggies.getVeggieTypes();
+for (var i = 0; i < veggieList.length; i++) {
+	var veggieName = veggieList[i];
+	veggieChoices.innerHTML += `<label for="veggie_${i}" class="label"><input type="checkbox" id="veggie_${i}" class="checkBox" name="veggieType" value="${veggieName}">${veggieName}</label>`;
+}
+// condiments
+var condimentsChoices = document.getElementById("condiments");
+
+var condList = SandwichMaker.condiments.getCondimentTypes();
+for (var i = 0; i < condList.length; i++) {
+	var condName = condList[i];
+condimentsChoices.innerHTML += `<label for="cond_${i}" class="label"><input type="checkbox" id="cond_${i}" class="checkBox" name="condType" value="${condName}">${condName}</label>`;
+}
+//******end DOM build **********
 
 
-},{"./sandwich":3}],2:[function(require,module,exports){
-// // This SandwichMaker IIFE augments the original one with meat
-// var SandwichMaker = (function(maker) {
-
-//   // Private variable to store the different meat prices
-//   var breadPrices = {"white": 0.75, "wheat": 0.77, "flatbread": 1.10};
-
-//   // Augment the original object with another method
-//   maker.addBread = function(bread) {
-//     return breadPrices[bread];
-//   };
-
-//   maker.getBreadTypes = function() {
-//   	return Object.getOwnPropertyNames(breadPrices);
-//   };
-
-//   // Return the new, augmented object with the new method on it
-//   return maker;
-// })(SandwichMaker);
 
 
+
+
+
+
+
+
+
+
+
+
+},{"./sandwich":6}],2:[function(require,module,exports){
 "use strict";
 
 let breadPrices = {"white": 0.75, "wheat": 0.77, "flatbread": 1.10};
@@ -54,18 +79,81 @@ module.exports = {getBreadTypes, addBread};
 },{}],3:[function(require,module,exports){
 "use strict";
 
+var cheesePrices = {"american": 0.15, "swiss": 0.25, "cheez-whiz": 6.99, "surprise me!": 0.55};
+
+let addCheese = function(cheese) {
+  return cheesePrices[cheese];
+};
+
+let getCheeseTypes = function() {
+	return Object.getOwnPropertyNames(cheesePrices);
+};
+
+module.exports = {addCheese, getCheeseTypes};
+},{}],4:[function(require,module,exports){
+"use strict";
+
+var condPrices = {"mayo": 0.10, "spicy mustard": 0.15, "special sauce": 9.99, "licorice": 6.95};
+
+let addCondiment = function(conds) {
+  return condPrices[conds];
+};
+
+let getCondimentTypes = function() {
+	return Object.getOwnPropertyNames(condPrices);
+};
+
+
+module.exports = {addCondiment, getCondimentTypes};
+},{}],5:[function(require,module,exports){
+"use strict";
+
+let meatPrices = {"turkey": 1.25, "ham": 1.00, "salami": 0.75, "roast beast": 6.66, "mystery": 5.99};
+
+let addMeat = function(meat) {
+  return meatPrices[meat];
+};
+
+let getMeatTypes = function() {
+	return Object.getOwnPropertyNames(meatPrices);
+};
+
+module.exports = {addMeat, getMeatTypes};
+
+},{}],6:[function(require,module,exports){
+"use strict";
+
 var bread = require("./bread");
-// var meat = 
+var meat = require("./meat");
+var cheese = require("./cheese");
+var veggies = require("./veggies");
+var condiments = require("./condiments");
 
 
 let Sandwich = {
-	bread
-	// meat,
-
-}
+	bread,
+	meat,
+	cheese,
+	veggies,
+	condiments
+};
 
 module.exports = Sandwich;
-},{"./bread":2}]},{},[1])
+},{"./bread":2,"./cheese":3,"./condiments":4,"./meat":5,"./veggies":7}],7:[function(require,module,exports){
+"use strict";
+
+var veggiePrices = {"lettuce": 0.10, "tomato": 0.15, "bacon": 0.75};
+
+let addVeggie = function(vegs) {
+  return veggiePrices[vegs];
+};
+
+let getVeggieTypes = function() {
+	return Object.getOwnPropertyNames(veggiePrices);
+};
+
+module.exports = {addVeggie, getVeggieTypes};
+},{}]},{},[1])
 
 
 //# sourceMappingURL=bundle.js.map
